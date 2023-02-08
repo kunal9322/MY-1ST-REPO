@@ -2,8 +2,8 @@ import random, os
 from pyrogram import Client, filters
 from Kunal import app, API_ID, API_HASH
 
-@Client.on_message(filters.private & filters.command("gen"))
-async def _(bot, update):    
+@app.on_message(filters.private & filters.command("gen"))
+async def _(app, message):    
     reply = await message.reply('`Processing...`')    
     try:
         if len(update.text.split()) > 1:
