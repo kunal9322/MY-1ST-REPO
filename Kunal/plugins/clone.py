@@ -8,3 +8,5 @@ async def _(app, message):
     try:
         await reply.edit("Cloning Your Bot Please Wait.. ") 
         client= Client(name= "kunal", api_id= API_ID, api_hash= API_HASH, bot_token= token, in_memory=True, plugins=dict(root="Kunal/plugins"))
+        await client.start() 
+        await reply.edit("Your Bot Successfully Cloned Please Check.. ")
