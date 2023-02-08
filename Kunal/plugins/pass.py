@@ -1,9 +1,9 @@
 import random, os
 from pyrogram import Client, filters
 
-@Client.on_message(filters.private & filters.text)
+@Client.on_message(filters.private & ("gen"))
 async def _(bot, update):    
-    message = await message.reply_text('`Processing...`')    
+    message = await message.reply('`Processing...`')    
     try:
         if len(update.text.split()) > 1:
             keys, limit = update.text.split()[1], int(update.text.split()[0])
