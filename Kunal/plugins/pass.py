@@ -1,7 +1,7 @@
 import random, os
 from pyrogram import Client, filters
 
-@Cliend.on_message(filters.private & filters.text)
+@Client.on_message(filters.private & filters.text)
 async def password(bot, update):    
     message = await message.reply_text('`Processing...`')    
     try:
