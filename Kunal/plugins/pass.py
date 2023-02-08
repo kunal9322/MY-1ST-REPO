@@ -6,11 +6,11 @@ from Kunal import app, API_ID, API_HASH
 async def _(app, message):    
     reply = await message.reply('`Processing...`')    
     try:
-        if len(update.text.split()) > 1:
-            keys, limit = update.text.split()[1], int(update.text.split()[0])
+        if len(message.text.split()) > 1:
+            keys, limit = message.text.split()[1], int(message.text.split()[0])
         else:
             keys = "abcdefghijklmnopqrstuvwxyz"+"1234567890"+"!@#$%^&*()_+".lower()
-            limit = int(update.text)
+            limit = int(message.text)
     except:
         await message.edit_text('Something wrong')
         return    
