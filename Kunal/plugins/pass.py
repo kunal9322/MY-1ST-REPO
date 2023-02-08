@@ -1,7 +1,8 @@
 import random, os
 from pyrogram import Client, filters
+from Kunal import app, API_ID, API_HASH
 
-@Client.on_message(filters.private & ("gen"))
+@Client.on_message(filters.private & filters.command("gen"))
 async def _(bot, update):    
     reply = await message.reply('`Processing...`')    
     try:
