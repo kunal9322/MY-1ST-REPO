@@ -1,4 +1,5 @@
 from pyrogram import filters, Client
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 @Client.on_message(filters.command(["start", "shuru","."]) & filters.private) 
 async def _(app:Client, message):
@@ -9,8 +10,8 @@ reply_markup=InlineKeyboardMarkup(
             [
                 [
                     InlineKeyboardButton(
-                        text="IMDB Link",
-                        url=url["imdbLink"],
+                        text="Kunal",
+                        url=url["https://t.me/MH17_KUNAL"],
                     ),
                 ],
             ],
