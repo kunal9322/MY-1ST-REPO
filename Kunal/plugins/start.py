@@ -11,7 +11,7 @@ reply_markup=InlineKeyboardMarkup(
                 [
                     InlineKeyboardButton(
                         text="Kunal",
-                        url=url["https://t.me/MH17_KUNAL"],
+                        
                     ),
                 ],
             ],
