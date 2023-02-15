@@ -1,1 +1,1 @@
-worker: python3 -m Kunal
+worker: python3 teletips_set.py
