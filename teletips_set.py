@@ -40,9 +40,9 @@ TELETIPS_MAIN_MENU_BUTTONS = [
 
                 InlineKeyboardButton('👥 SUPPORT', callback_data="GROUP_CALLBACK"),
 
-                InlineKeyboardButton('📣 CHANNEL', url='https://t.me/teletipsofficialchannel'),
+                InlineKeyboardButton('📣 CHANNEL', url='https://t.me/little_little_hackur'),
 
-                InlineKeyboardButton('👨‍💻 CREATOR', url='https://t.me/teIetips')
+                InlineKeyboardButton('👨‍💻 CREATOR', url='https://t.me/little_little_hackur')
 
             ],
 
@@ -110,7 +110,7 @@ async def callback_query(client: Client, query: CallbackQuery):
 
             [
 
-                InlineKeyboardButton("TeLe TiPs Chat [EN]", url="https://t.me/teletipsofficialontopicchat")
+                InlineKeyboardButton("🎬👻", url="https://t.me/little_little_hackur")
 
             ],
 
@@ -144,7 +144,7 @@ async def callback_query(client: Client, query: CallbackQuery):
 
             [
 
-                InlineKeyboardButton("🎥 Video", url="https://youtu.be/nYSrgdIYdTw")
+                InlineKeyboardButton("soon", url="https://youtube.com/@KunalG93")
 
             ],
 
