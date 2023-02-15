@@ -1,4 +1,4 @@
-START_TEXT = 'Heya,\nMy name is **Countdown Timer** ⏰\n\nI can countdown to your important events in **any group chat**. 🎉\nUse me to keep track of how much time is left for the event ⏳\n\nHit **❓HELP** to find out more about how to use me.'
+START_TEXT = 'Heya,\nMy name is **{}** ⏰\n\nI can countdown to your important events in **any group chat**. 🎉\nUse me to keep track of how much time is left for the event ⏳\n\nHit **❓HELP** to find out more about how to use me.'
 
 GROUP_TEXT="""
 
@@ -40,5 +40,5 @@ HELP_TEXT = """
 
 """
 
-TUTORIAL_TEXT = "💡 | Click the **🎥 Video** button to see the way of creating this bot for your group easily."
+TUTORIAL_TEXT = "video coming soon join for updates @little_little_hackur"
 
