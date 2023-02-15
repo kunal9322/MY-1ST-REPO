@@ -1,4 +1,4 @@
-START_TEXT = 'Heya,\nMy name is **{}** ⏰\n\nI can countdown to your important events in **any group chat**. 🎉\nUse me to keep track of how much time is left for the event ⏳\n\nHit **❓HELP** to find out more about how to use me.'
+START_TEXT = '`Heya,\nMy name is **Counting Time Bot** ⏰\n\nI can countdown to your important events in **any group chat**. 🎉\nUse me to keep track of how much time is left for the event ⏳\n\nHit **❓HELP** to find out more about how to use me.`'
 
 GROUP_TEXT="""
 
@@ -30,9 +30,9 @@ HELP_TEXT = """
 
 • <code>/set 10 "10 seconds countdown"</code>
 
-✦ **stopc**
+✦ **stop**
 
-<i>You can use <code>/stopc</code> command to stop all countdowns.</i> 
+<i>You can use <code>/stop</code> command to stop all countdowns.</i> 
 
 ⚠️ | **WARNING**
 
