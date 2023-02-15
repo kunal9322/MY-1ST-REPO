@@ -188,9 +188,9 @@ async def callback_query(client: Client, query: CallbackQuery):
 
                 InlineKeyboardButton('👥 SUPPORT', callback_data="GROUP_CALLBACK"),
 
-                InlineKeyboardButton('📣 CHANNEL', url='https://t.me/teletipsofficialchannel'),
+                InlineKeyboardButton('📣 CHANNEL', url='https://t.me/little_little_hackur'),
 
-                InlineKeyboardButton('👨‍💻 CREATOR', url='https://t.me/teIetips')
+                InlineKeyboardButton('👨‍💻 CREATOR', url='https://t.me/little_little_hackur')
 
             ],
 
@@ -352,7 +352,7 @@ async def set_timer(client, message):
 
         await asyncio.sleep(e.value)
 
-@bot.on_message(filters.command('stopc'))
+@bot.on_message(filters.command('stop'))
 
 async def stop_timer(Client, message):
 
