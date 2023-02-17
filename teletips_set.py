@@ -18,6 +18,9 @@ def shorten_url(long_url):
 def start(update: Update, context: CallbackContext) -> None:
     update.message.reply_text('Hi! Send me a URL and I will shorten it for you.')
 
+def help_command(update: Update, context: CallbackContext) -> None:
+    update.message.reply_text('Commands:\n/start - Start the bot\n/shorten - Shorten a URL\n/stats - Get statistics\n/about - About the bot')
+
 def shorten(update: Update, context: CallbackContext) -> None:
     long_url = update.message.text
     shortened_url = shorten_url(long_url)
@@ -26,13 +29,22 @@ def shorten(update: Update, context: CallbackContext) -> None:
     else:
         update.message.reply_text('Sorry, an error occurred while shortening the URL.')
 
+def stats(update: Update, context: CallbackContext) -> None:
+    update.message.reply_text('Sorry, statistics are not available yet.')
+
+def about(update: Update, context: CallbackContext) -> None:
+    update.message.reply_text('This bot was created by John Doe.')
+
 def main() -> None:
     updater = Updater(TELEGRAM_BOT_TOKEN, use_context=True)
     dispatcher = updater.dispatcher
     dispatcher.add_handler(CommandHandler("start", start))
+    dispatcher.add_handler(CommandHandler("help", help_command))
     dispatcher.add_handler(CommandHandler("shorten", shorten))
+    dispatcher.add_handler(CommandHandler("stats", stats))
+    dispatcher.add_handler(CommandHandler("about", about))
     updater.start_polling()
     updater.idle()
 
-if name == 'main':
+if __name__ == '__main__':
     main()
