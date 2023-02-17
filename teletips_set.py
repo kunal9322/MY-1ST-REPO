@@ -1,29 +1,38 @@
-import pyshorteners
-from pyrogram import Client, filters
-from pyrogram.types import Message
+import requests
+from telegram import Update
+from telegram.ext import Updater, CommandHandler, CallbackContext
 
-# Set up the easysky.in shortener
-api_id = "16743442"
-api_hash = "12bbd720f4097ba7713c5e40a11dfd2a"
-shortener = pyshorteners.Shortener('easysky', api_key=f"{api_id}:{api_hash}")
+EASYSKY_API_KEY = '26900f01070d5c9fcdd9ece883701597c9b302c1'
+TELEGRAM_BOT_TOKEN = '5815404727:AAGeLb-faQDcZYhkbI32VMof3upWR0YB2bc'
+TELEGRAM_API_ID = 16743442
+TELEGRAM_API_HASH = '12bbd720f4097ba7713c5e40a11dfd2a'
 
-# Set up the Pyrogram client
-api_key = "26900f01070d5c9fcdd9ece883701597c9b302c1"
-api_hash = "12bbd720f4097ba7713c5e40a11dfd2a"
-bot_token = "5815404727:AAGeLb-faQDcZYhkbI32VMof3upWR0YB2bc"
-app = Client("my_bot", api_id=api_key, api_hash=api_hash, bot_token=bot_token)
+def shorten_url(long_url):
+    url = f'https://easysky.in/api/shorten?url={long_url}&apikey={EASYSKY_API_KEY}'
+    response = requests.get(url)
+    if response.status_code == 200:
+        return response.json()['shortenedUrl']
+    else:
+        return None
 
-# Define a command handler for the "/shorten" command
-@app.on_message(filters.command("shorten"))
-def shorten_command_handler(client: Client, message: Message):
-    # Get the link to be shortened from the user input
-    original_link = message.text.split(" ", 1)[1]
-    
-    # Shorten the link using easysky.in
-    short_link = shortener.short(original_link)
-    
-    # Send the shortened link to the user
-    message.reply_text(short_link)
+def start(update: Update, context: CallbackContext) -> None:
+    update.message.reply_text('Hi! Send me a URL and I will shorten it for you.')
 
-# Start the bot
-app.run()
+def shorten(update: Update, context: CallbackContext) -> None:
+    long_url = update.message.text
+    shortened_url = shorten_url(long_url)
+    if shortened_url is not None:
+        update.message.reply_text(shortened_url)
+    else:
+        update.message.reply_text('Sorry, an error occurred while shortening the URL.')
+
+def main() -> None:
+    updater = Updater(TELEGRAM_BOT_TOKEN, use_context=True)
+    dispatcher = updater.dispatcher
+    dispatcher.add_handler(CommandHandler("start", start))
+    dispatcher.add_handler(CommandHandler("shorten", shorten))
+    updater.start_polling()
+    updater.idle()
+
+if name == 'main':
+    main()
