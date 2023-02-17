@@ -23,7 +23,7 @@ def help_command(update: Update, context: CallbackContext) -> None:
 
 def shorten(update: Update, context: CallbackContext) -> None:
     long_url = update.message.text
-    shortened_url = shortened_url(long_url)
+    shortened_url = shorten_url(long_url)
     if shortened_url is not None:
         update.message.reply_text(shortened_url)
     else:
@@ -45,6 +45,6 @@ def main() -> None:
     dispatcher.add_handler(CommandHandler("about", about))
     updater.start_polling()
     updater.idle()
-
+print('Bot Started Successfully') 
 if __name__ == '__main__':
     main()
