@@ -27,7 +27,7 @@ def shorten(update: Update, context: CallbackContext) -> None:
         update.message.reply_text('Sorry, an error occurred while shortening the URL.')
 
 def main() -> None:
-    updater = Updater(TELEGRAM_BOT_TOKEN, context=True)
+    updater = Updater(TELEGRAM_BOT_TOKEN, use_context=True)
     dispatcher = updater.dispatcher
     dispatcher.add_handler(CommandHandler("start", start))
     dispatcher.add_handler(CommandHandler("shorten", shorten))
