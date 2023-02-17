@@ -54,5 +54,4 @@ def ban(update: Update, context: CallbackContext) -> None:
         updater.start_polling()
         updater.idle()
 
-if __name__ == '__main__':
-    main()
+
