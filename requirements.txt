@@ -1,7 +1,2 @@
-python-telegram-bot==13.11
-Telethon
-pyrogram
-TgCrypto
-telegram
-requests
-pyshorteners
+requests==2.26.0
+python-telegram-bot==13.9
