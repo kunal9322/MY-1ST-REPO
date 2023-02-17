@@ -65,3 +65,4 @@ dispatcher.add_handler(shorten_handler)
 
 # Start the bot
 updater.start_polling()
+print('bot running smooth') 
