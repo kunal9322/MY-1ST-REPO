@@ -1,6 +1,6 @@
 import os
 import pyrogram
-import requests
+from pyrogram import requests
 
 TOKEN = os.environ.get("BOT_TOKEN")
 API_ID = int(os.environ.get("API_ID"))
