@@ -6,7 +6,7 @@ from telegram.ext import CommandHandler, Updater
 TOKEN = '6105281766:AAHPNFllRa3kscRfeswDNO85_3NDxWYYp_0'
 API_ID = '16743442'
 API_HASH = '12bbd720f4097ba7713c5e40a11dfd2a'
-API_ENDPOINT = 'https://easysky.in/api?api=26900f01070d5c9fcdd9ece883701597c9b302c1&url=yourdestinationlink.com&alias=CustomAlias'
+API_ENDPOINT = 'https://easysky.in/api?api=26900f01070d5c9fcdd9ece883701597c9b302c1&url=yourdestinationlink.com&alias=CustomAlias&format=text'
 
 # Create the bot and add the command handlers
 bot = telegram.Bot(token=TOKEN)
