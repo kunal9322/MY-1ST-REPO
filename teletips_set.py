@@ -7,8 +7,7 @@ TELEGRAM_API_ID = 16743442
 TELEGRAM_API_HASH = '12bbd720f4097ba7713c5e40a11dfd2a'
 
 def start(update: Update, context: CallbackContext) -> None:
-update.message.reply_text('Hi! I am a bot to help with muting users.\n\n') 
-'Commands:\n/mute - Mute a user\n/unmute - Unmute a user\n/ban - Ban a user\n/unban - Unban a user')
+update.message.reply_text('Hi! I am a bot to help with muting users.\n\nCommands:\n/mute - Mute a user\n/unmute - Unmute a user\n/ban - Ban a user\n/unban - Unban a user')
 
 def help_command(update: Update, context: CallbackContext) -> None:
 update.message.reply_text('Commands:\n/mute - Mute a user\n/unmute - Unmute a user\n/ban - Ban a user\n/unban - Unban a user')
