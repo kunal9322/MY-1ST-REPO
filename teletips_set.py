@@ -1,47 +1,42 @@
-from pyrogram import Client, filters
+import os
+import pyrogram
+import requests
 
-# Set up Pyrogram client
-app = Client("5815404727:AAGeLb-faQDcZYhkbI32VMof3upWR0YB2bc")
+TOKEN = os.environ.get("BOT_TOKEN")
+API_ID = int(os.environ.get("API_ID"))
+API_HASH = os.environ.get("API_HASH")
 
-# Define function to handle incoming messages
-@app.on_message(filters.command("mute"))
-def mute_user(client, message):
-    chat_id = message.chat.id
-    user_id = message.from_user.id
-    client.restrict_chat_member(chat_id, user_id, until_date=2147483647)
-    client.send_message(chat_id, "You have been muted in this group.")
+app = pyrogram.Client(
+    "link_shorten_bot",
+    bot_token=TOKEN,
+    api_id=API_ID,
+    api_hash=API_HASH
+)
 
-@app.on_message(filters.command("unmute"))
-def unmute_user(client, message):
-    chat_id = message.chat.id
-    user_id = message.from_user.id
-    client.restrict_chat_member(chat_id, user_id, until_date=0)
-    client.send_message(chat_id, "You have been unmuted in this group.")
 
-@app.on_message(filters.command("ban"))
-def ban_user(client, message):
-    chat_id = message.chat.id
-    try:
-        user_id = int(message.text.split()[1])
-        client.kick_chat_member(chat_id, user_id)
-        client.send_message(chat_id, "User has been banned from the group.")
-    except:
-        client.send_message(chat_id, "Please specify a user to ban.")
+@app.on_message(pyrogram.filters.command("start"))
+def start(client, message):
+    message.reply_text(
+        "Hi! I'm a link shortener bot. Send me a URL and I'll shorten it for you."
+    )
 
-@app.on_message(filters.command("unban"))
-def unban_user(client, message):
-    chat_id = message.chat.id
-    try:
-        user_id = int(message.text.split()[1])
-        client.unban_chat_member(chat_id, user_id)
-        client.send_message(chat_id, "User has been unbanned from the group.")
-    except:
-        client.send_message(chat_id, "Please specify a user to unban.")
 
-@app.on_message(filters.command("help"))
-def help_message(client, message):
-    help_text = "Available commands:\n/mute - mute yourself in the group\n/unmute - unmute yourself in the group\n/ban [user_id] - ban a user from the group\n/unban [user_id] - unban a user from the group\n/help - display this help message"
-    client.send_message(message.chat.id, help_text)
+@app.on_message(pyrogram.filters.command("help"))
+def help(client, message):
+    message.reply_text(
+        "To shorten a link, simply send me a message with the URL you want to shorten."
+    )
 
-# Start the Pyrogram client
+
+@app.on_message(pyrogram.filters.regex(r"https?://[^\s]+"))
+def shorten(client, message):
+    url = message.text
+    response = requests.post("https://easysky.in/api/create", data={"url": url})
+    if response.status_code == 200:
+        shortened_url = response.json().get("result").get("short_link")
+        message.reply_text(shortened_url)
+    else:
+        message.reply_text("Sorry, an error occurred while trying to shorten the link.")
+
+
 app.run()
