@@ -1,57 +1,69 @@
 import requests
-from telegram import Update
+from telegram import Update, ChatPermissions
 from telegram.ext import Updater, CommandHandler, CallbackContext
 
-EASYSKY_API_KEY = '26900f01070d5c9fcdd9ece883701597c9b302c1'
 TELEGRAM_BOT_TOKEN = '5815404727:AAGeLb-faQDcZYhkbI32VMof3upWR0YB2bc'
 TELEGRAM_API_ID = 16743442
 TELEGRAM_API_HASH = '12bbd720f4097ba7713c5e40a11dfd2a'
 
-def shorten_url(long_url, alias=None):
-    url = f'https://easysky.in/api/shorten?url={long_url}&apikey={EASYSKY_API_KEY}'
-    if alias:
-        url += f'&custom={alias}'
-    response = requests.get(url)
-    if response.status_code == 200:
-        return response.json()['shortenedUrl']
-    else:
-        return None
-
 def start(update: Update, context: CallbackContext) -> None:
-    update.message.reply_text('Hi! Send me a URL and I will shorten it for you.')
+update.message.reply_text('Hi! I am a bot to help with muting users.\n\n'
+'Commands:\n/mute - Mute a user\n/unmute - Unmute a user\n/ban - Ban a user\n/unban - Unban a user')
 
 def help_command(update: Update, context: CallbackContext) -> None:
-    update.message.reply_text('Commands:\n/start - Start the bot\n/shorten - Shorten a URL\n/stats - Get statistics\n/about - About the bot')
+update.message.reply_text('Commands:\n/mute - Mute a user\n/unmute - Unmute a user\n/ban - Ban a user\n/unban - Unban a user')
 
-def shorten(update: Update, context: CallbackContext) -> None:
-    args = context.args
-    if len(args) == 0:
-        update.message.reply_text('Please provide a URL to shorten.')
-    else:
-        long_url = args[0]
-        alias = args[1] if len(args) > 1 else None
-        shortened_url = shorten_url(long_url, alias)
-        if shortened_url is not None:
-            update.message.reply_text(shortened_url)
-        else:
-            update.message.reply_text('Sorry, an error occurred while shortening the URL.')
+def mute(update: Update, context: CallbackContext) -> None:
+if len(context.args) == 0:
+update.message.reply_text('Please specify a user to mute.')
+return
+user_id = context.args[0]
+chat_id = update.effective_chat.id
+try:
+context.bot.restrict_chat_member(chat_id=chat_id, user_id=user_id, permissions=ChatPermissions())
+update.message.reply_text(f'User {user_id} has been muted.')
+except Exception as e:
+update.message.reply_text(f'Error: {e}')
 
-def stats(update: Update, context: CallbackContext) -> None:
-    update.message.reply_text('Sorry, statistics are not available yet.')
+def unmute(update: Update, context: CallbackContext) -> None:
+if len(context.args) == 0:
+update.message.reply_text('Please specify a user to unmute.')
+return
+user_id = context.args[0]
+chat_id = update.effective_chat.id
+try:
+context.bot.restrict_chat_member(chat_id=chat_id, user_id=user_id, permissions=ChatPermissions(can_send_messages=True))
+update.message.reply_text(f'User {user_id} has been unmuted.')
+except Exception as e:
+update.message.reply_text(f'Error: {e}')
 
-def about(update: Update, context: CallbackContext) -> None:
-    update.message.reply_text('This bot was created by John Doe.')
+def ban(update: Update, context: CallbackContext) -> None:
+if len(context.args) == 0:
+update.message.reply_text('Please specify a user to ban.')
+return
+user_id = context.args[0]
+chat_id = update.effective_chat.id
+try:
+context.bot.kick_chat_member(chat_id=chat_id, user_id=user_id)
+update.message.reply_text(f'User {user_id} has been banned.')
+except Exception as e:
+update.message.reply_text(f'Error: {e}')
+
+def unban(update: Update, context: CallbackContext) -> None:
+if len(context.args) == 0:
+update.message.reply_text('Please specify a user to unban.')
+return
+user_id = context.args[0]
+chat_id = update.effective_chat.id
+try:
+context.bot.unban_chat_member(chat_id=chat_id, user_id=user_id)
+update.message.reply_text(f'User {user_id} has been unbanned.')
+except Exception as e:
+update.message.reply_text(f'Error: {e}')
 
 def main() -> None:
-    updater = Updater(TELEGRAM_BOT_TOKEN, use_context=True)
-    dispatcher = updater.dispatcher
-    dispatcher.add_handler(CommandHandler("start", start))
-    dispatcher.add_handler(CommandHandler("help", help_command))
-    dispatcher.add_handler(CommandHandler("shorten", shorten))
-    dispatcher.add_handler(CommandHandler("stats", stats))
-    dispatcher.add_handler(CommandHandler("about", about))
-    updater.start_polling()
-    updater.idle()
-
-if __name__ == '__main__':
-    main()
+updater = Updater(TELEGRAM_BOT_TOKEN, use_context=True)
+dispatcher = updater.dispatcher
+dispatcher.add_handler(CommandHandler("start", start))
+dispatcher.add_handler(CommandHandler("help", help_command))
+dispatcher.add_handler(CommandHandler("mute", mute))
