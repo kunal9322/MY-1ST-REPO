@@ -1,8 +1,8 @@
-import requests
+
 from telegram import Update
 from telegram.ext import Updater, CommandHandler, CallbackContext
 
-EASYSKY_API_KEY = 'your_easysky_api_key'
+EASYSKY_API_KEY = '26900f01070d5c9fcdd9ece883701597c9b302c1'
 TELEGRAM_BOT_TOKEN = '5815404727:AAGeLb-faQDcZYhkbI32VMof3upWR0YB2bc'
 TELEGRAM_API_ID = '16743442'
 TELEGRAM_API_HASH = '12bbd720f4097ba7713c5e40a11dfd2a'
