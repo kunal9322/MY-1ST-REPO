@@ -3,9 +3,9 @@ from telegram import Update
 from telegram.ext import Updater, CommandHandler, CallbackContext
 
 EASYSKY_API_KEY = 'your_easysky_api_key'
-TELEGRAM_BOT_TOKEN = 'your_telegram_bot_token'
-TELEGRAM_API_ID = 'your_telegram_api_id'
-TELEGRAM_API_HASH = 'your_telegram_api_hash'
+TELEGRAM_BOT_TOKEN = '5815404727:AAGeLb-faQDcZYhkbI32VMof3upWR0YB2bc'
+TELEGRAM_API_ID = '16743442'
+TELEGRAM_API_HASH = '12bbd720f4097ba7713c5e40a11dfd2a'
 
 def shorten_url(long_url):
     url = f'https://easysky.in/api/shorten?url={long_url}&apikey={EASYSKY_API_KEY}'
