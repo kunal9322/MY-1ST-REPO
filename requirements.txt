@@ -3,3 +3,4 @@ Telethon
 pyrogram
 TgCrypto
 telegram
+requests
