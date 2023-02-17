@@ -50,3 +50,9 @@ def unmute(update: Update, context: CallbackContext) -> None:
 def ban(update: Update, context: CallbackContext) -> None:
     if len(context.args) == 0:
         update.message.reply_text
+
+        updater.start_polling()
+        updater.idle()
+
+if __name__ == '__main__':
+    main()
