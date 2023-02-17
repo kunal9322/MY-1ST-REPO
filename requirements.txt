@@ -4,4 +4,4 @@ pyrogram
 TgCrypto
 telegram
 requests
-pyshortners
+pyshorteners
