@@ -1,66 +1,67 @@
+import telegram
 import requests
-from telegram import Update
-from telegram.ext import Updater, CommandHandler, CallbackContext
+from telegram.ext import CommandHandler, Updater
 
-EASYSKY_API_KEY = '26900f01070d5c9fcdd9ece883701597c9b302c1'
-TELEGRAM_BOT_TOKEN = '5815404727:AAGeLb-faQDcZYhkbI32VMof3upWR0YB2bc'
-TELEGRAM_API_ID = 16743442
-TELEGRAM_API_HASH = '12bbd720f4097ba7713c5e40a11dfd2a'
+# Set the Telegram API token and the easysky.in API credentials
+TOKEN = 'BOT_TOKEN'
+API_ID = 'API_ID'
+API_HASH = 'API_HASH'
+API_ENDPOINT = 'https://easysky.in/api'
 
-# Define ban, unban, mute, and unmute functions
+# Create the bot and add the command handlers
+bot = telegram.Bot(token=TOKEN)
+updater = Updater(token=TOKEN, use_context=True)
+dispatcher = updater.dispatcher
 
-def ban(update: Update, context: CallbackContext) -> None:
-    user_id = update.message.reply_to_message.from_user.id
-    context.bot.kick_chat_member(update.message.chat_id, user_id)
-    update.message.reply_text(f"{user_id} has been banned from the chat.")
+# Define the /start command handler
+def start_handler(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text="Welcome to the URL shortener bot! Use /help to see the available commands.")
 
-def unban(update: Update, context: CallbackContext) -> None:
-    user_id = context.args[0]
-    context.bot.unban_chat_member(update.message.chat_id, user_id)
-    update.message.reply_text(f"{user_id} has been unbanned from the chat.")
+# Define the /help command handler
+def help_handler(update, context):
+    help_text = "Available commands:\n\n"
+    help_text += "/start - Start the bot.\n"
+    help_text += "/help - Show the available commands.\n"
+    help_text += "/ping - Check if the bot is online.\n"
+    help_text += "/shorten <url> - Shorten a URL using easysky.in."
+    context.bot.send_message(chat_id=update.effective_chat.id, text=help_text)
 
-def mute(update: Update, context: CallbackContext) -> None:
-    user_id = update.message.reply_to_message.from_user.id
-    context.bot.restrict_chat_member(update.message.chat_id, user_id, can_send_messages=False)
-    update.message.reply_text(f"{user_id} has been muted in the chat.")
+# Define the /ping command handler
+def ping_handler(update, context):
+    context.bot.send_message(chat_id=update.effective_chat.id, text="Pong!")
 
-def unmute(update: Update, context: CallbackContext) -> None:
-    user_id = context.args[0]
-    context.bot.restrict_chat_member(update.message.chat_id, user_id, can_send_messages=True)
-    update.message.reply_text(f"{user_id} has been unmuted in the chat.")
+# Define the /shorten command handler
+def shorten_handler(update, context):
+    # Extract the URL from the command arguments
+    args = context.args
+    if len(args) == 0:
+        context.bot.send_message(chat_id=update.effective_chat.id, text="Please provide a URL to shorten.")
+        return
+    url = args[0]
 
-# Define existing functions
+    # Call the easysky.in API to shorten the URL
+    params = {'api_id': API_ID, 'api_hash': API_HASH, 'url': url}
+    response = requests.post(API_ENDPOINT, data=params)
+    if response.status_code != 200:
+        context.bot.send_message(chat_id=update.effective_chat.id, text="Error shortening the URL.")
+        return
+    short_url = response.text
 
-def shorten_url(long_url):
-    url = f'https://easysky.in/api/shorten?url={long_url}&apikey={EASYSKY_API_KEY}'
-    response = requests.get(url)
-    if response.status_code == 200:
-        return response.json()['shortenedUrl']
-    else:
-        return None
+    # Send the shortened URL to the user
+    context.bot.send_message(chat_id=update.effective_chat.id, text=short_url)
 
-def start(update: Update, context: CallbackContext) -> None:
-    update.message.reply_text('Hi! Send me a URL and I will shorten it for you.')
+# Add the command handlers to the dispatcher
+start_handler = CommandHandler('start', start_handler)
+dispatcher.add_handler(start_handler)
 
-def shorten(update: Update, context: CallbackContext) -> None:
-    long_url = update.message.text
-    shortened_url = shorten_url(long_url)
-    if shortened_url is not None:
-        update.message.reply_text(shortened_url)
-    else:
-        update.message.reply_text('Sorry, an error occurred while shortening the URL.')
+help_handler = CommandHandler('help', help_handler)
+dispatcher.add_handler(help_handler)
 
-def main() -> None:
-    updater = Updater(TELEGRAM_BOT_TOKEN, use_context=True)
-    dispatcher = updater.dispatcher
-    dispatcher.add_handler(CommandHandler("start", start))
-    dispatcher.add_handler(CommandHandler("shorten", shorten))
-    dispatcher.add_handler(CommandHandler("ban", ban))
-    dispatcher.add_handler(CommandHandler("unban", unban))
-    dispatcher.add_handler(CommandHandler("mute", mute))
-    dispatcher.add_handler(CommandHandler("unmute", unmute))
-    updater.start_polling()
-    updater.idle()
+ping_handler = CommandHandler('ping', ping_handler)
+dispatcher.add_handler(ping_handler)
 
-if __name__ == '__main__':
-    main()
+shorten_handler = CommandHandler('shorten', shorten_handler)
+dispatcher.add_handler(shorten_handler)
+
+# Start the bot
+updater.start_polling()
