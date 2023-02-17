@@ -11,9 +11,9 @@ logging.basicConfig(
 )
 
 # Get credentials from environment variables
-TELEGRAM_BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
-TELEGRAM_API_ID = os.environ.get('TELEGRAM_API_ID')
-TELEGRAM_API_HASH = os.environ.get('TELEGRAM_API_HASH')
+TELEGRAM_BOT_TOKEN = os.environ.get('5815404727:AAGeLb-faQDcZYhkbI32VMof3upWR0YB2bc')
+TELEGRAM_API_ID = os.environ.get('16743442')
+TELEGRAM_API_HASH = os.environ.get('12bbd720f4097ba7713c5e40a11dfd2a')
 
 def start(update: Update, context: CallbackContext) -> None:
     update.message.reply_text('Hi! I am a bot to help with muting users.\n\nCommands:\n/mute - Mute a user\n/unmute - Unmute a user\n/ban - Ban a user\n/unban - Unban a user')
