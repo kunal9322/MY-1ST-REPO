@@ -2,7 +2,12 @@ from pyrogram import Client, filters
 import random
 
 # Create a new Pyrogram client instance
-app = Client("6105281766:AAHPNFllRa3kscRfeswDNO85_3NDxWYYp_0")
+# Create a new Pyrogram client instance
+app = Client(
+    "6105281766:AAHPNFllRa3kscRfeswDNO85_3NDxWYYp_0",
+    api_id=16743442,  # replace with your API ID
+    api_hash="12bbd720f4097ba7713c5e40a11dfd2a"  # replace with your API hash
+)
 
 # Define a handler for the /start command
 @app.on_message(filters.command("start"))
