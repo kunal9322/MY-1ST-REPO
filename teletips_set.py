@@ -3,9 +3,9 @@ import random
 
 # Create a new Pyrogram client instance
 app = Client(
-    "my_bot_token",
-    api_id=12345,  # replace with your API ID
-    api_hash="0123456789abcdef0123456789abcdef"  # replace with your API hash
+    "6105281766:AAHPNFllRa3kscRfeswDNO85_3NDxWYYp_0",
+    api_id=16743442,  # replace with your API ID
+    api_hash="12bbd720f4097ba7713c5e40a11dfd2a"  # replace with your API hash
 )
 
 # Define a handler for the /start command
