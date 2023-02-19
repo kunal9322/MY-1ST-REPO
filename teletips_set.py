@@ -12,7 +12,7 @@ app = Client(
 
 # TMDb API parameters
 api_key = "15c18e6e8a18d13b1438ebe6c6f6aa2d"
-base_url = "https://api.themoviedb.org/3"
+base_url = "https://api.themoviedb.org/3/search/movie?api_key={tmdb_key}&query={title"
 
 # Telegram channel parameters
 channel_username = "@mychannel"
