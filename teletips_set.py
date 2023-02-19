@@ -5,13 +5,13 @@ import datetime
 # Create a Pyrogram client with your API ID, API hash, and bot token
 app = Client(
     "new_movie_bot",
-    api_id=YOUR_API_ID,
-    api_hash="YOUR_API_HASH",
-    bot_token="YOUR_BOT_TOKEN"
+    api_id=16743442,
+    api_hash="12bbd720f4097ba7713c5e40a11dfd2a",
+    bot_token="6105281766:AAHPNFllRa3kscRfeswDNO85_3NDxWYYp_0"
 )
 
 # TMDb API parameters
-api_key = "YOUR_TMDB_API_KEY"
+api_key = "15c18e6e8a18d13b1438ebe6c6f6aa2d"
 base_url = "https://api.themoviedb.org/3"
 
 # Telegram channel parameters
