@@ -1,1 +1,1 @@
-worker: python3 teletips_set.py
+worker: python3 simplebot.py
