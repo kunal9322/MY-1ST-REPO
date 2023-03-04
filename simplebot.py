@@ -3,7 +3,7 @@ from pyrogram import Client, filters, idle
 # Create a new Pyrogram client instance
 app = Client(
     "my_bot",
-    bot_token="6295293651:AAHmKMz1hIyZSu5ERf-d1rzdjpVE7V-JFdw", 
+    bot_token="6295293651:AAEMBiNvTMvIHylebwaWW4KvYsTaBE7Y7r4", 
     api_id=16743442,
     api_hash="12bbd720f4097ba7713c5e40a11dfd2a"
 )
